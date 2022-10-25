@@ -39,23 +39,43 @@ void PrintArray(int[,] matr)
 } 
 
 // Решение
-void Final(int[,] array)
+    //создаем одномерный массив  заполняем его суммами столбцов
+int[] Final(int[,] array,int amountcolums)
 {
-
+    int[] sum = new int[amountcolums];
     for (int i = 0; i < array.GetLength(1); i++)
     {
-        int sum = 0;
+       int result = 0;
         for (int j = 0; j < array.GetLength(0); j++)
         {
-            sum += array[j, i];
+            result += array[j, i];
         }
 
-        Console.Write($" Сумма столбца = {sum} ");
-        int result = sum/array.GetLength(0);
-        Console.WriteLine($"Среднеарифметическое столбца = {result}");
-        Console.WriteLine();
+        sum[i]=result;
     
 }
+return sum;
+}
+// печать массива
+void Print(int[] Array)
+{
+    Console.WriteLine("[" + string.Join("; ", Array) + "]");
+}
+//находим среднеарифметическое
+    double[] FinalResult(int[]array,int amountcolums, int amountstrings)
+{
+double[]avgcolum = new double[amountcolums];
+for (int i=0;i<amountcolums;i++)
+ 
+{
+    avgcolum[i]= (array[i]*1.0)/ amountstrings;
+}
+return avgcolum;
+}
+// печатаем итоговый массив
+void PrintFinal(double[] Array)
+{
+    Console.WriteLine("[" + string.Join("; ", Array) + "]");
 }
 
 
@@ -65,5 +85,12 @@ int amountcolums = GetValue(3, 5);
 int[,] array = CreateArray(amountstrings, amountcolums);
 Fill(array);
 PrintArray(array);
-Final(array);
+Console.WriteLine("******");
+int[]sum = Final(array,amountcolums);
+Print(sum);
+Console.WriteLine("******");
+double[] avgcolum = FinalResult(sum,amountcolums,amountstrings);
+PrintFinal(avgcolum);
+
+
       
